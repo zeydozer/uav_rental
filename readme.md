@@ -63,6 +63,11 @@ All information is **postgres**, database name is **uav_rental**.
   - `password` (string)
   - `email` (string) (optional)
 
+**List all users:**
+  ```
+  GET /api/users
+  ```
+
 To authenticate, include the JWT token in the `Authorization` header as follows:
 ```
 Authorization: Bearer <your_token>
@@ -80,7 +85,7 @@ Authorization: Bearer <your_token>
   POST /api/uavs
   ```
   **Parameters:**
-  - `name` (string)
+  - `brand` (string)
   - `model` (string)
   - `weight` (float)
   - `category` (string)
@@ -95,7 +100,7 @@ Authorization: Bearer <your_token>
   PUT /api/uavs/{id}
   ```
   **Parameters:**
-  - `name` (string)
+  - `brand` (string)
   - `model` (string)
   - `weight` (float)
   - `category` (string)
@@ -110,8 +115,8 @@ Authorization: Bearer <your_token>
   POST /api/uavs/{id}/rent
   ```
   **Parameters:**
-  - `start_date` (string): date (YYYY-MM-DD)
-  - `end_date` (string): date (YYYY-MM-DD)
+  - `start_date` (datetime)
+  - `end_date` (datetime)
 
 ### Rental Management
 
@@ -130,10 +135,10 @@ Authorization: Bearer <your_token>
   PUT /api/rentals/{id}
   ```
   **Parameters:**
-  - `uav` (integer)
-  - `renting_member` (integer)
-  - `start_date` (string): date (YYYY-MM-DD)
-  - `end_date` (string): date (YYYY-MM-DD)
+  - `uav_id` (integer)
+  - `renting_member_id` (integer)
+  - `start_date` (datetime)
+  - `end_date` (datetime)
 
 - **Delete a specific rental:**
   ```
