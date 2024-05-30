@@ -97,7 +97,7 @@ class UAVTests(APITestCase):
     def test_list_uavs(self):
         response = self.list_uavs()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 4)
+        self.assertEqual(len(response.data['data']), 4)
 
     def test_retrieve_uav(self):
         response = self.retrieve_uav()
@@ -148,31 +148,31 @@ class UAVTests(APITestCase):
         self.delete_uav()
         response = self.client.get(reverse('uav-list-create'), {'brand': 'DJI'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
-        self.assertEqual(response.data[0]['brand'], 'DJI')
-        self.assertEqual(response.data[1]['brand'], 'DJI')
+        self.assertEqual(len(response.data['data']), 2)
+        self.assertEqual(response.data['data'][0]['brand'], 'DJI')
+        self.assertEqual(response.data['data'][1]['brand'], 'DJI')
 
     def test_filter_by_weight_gte(self):
         self.delete_uav()
         response = self.client.get(reverse('uav-list-create'), {'weight__gte': 1.0})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
-        self.assertEqual(response.data[0]['weight'], 1.2)
-        self.assertEqual(response.data[1]['weight'], 1.5)
+        self.assertEqual(len(response.data['data']), 2)
+        self.assertEqual(response.data['data'][0]['weight'], 1.2)
+        self.assertEqual(response.data['data'][1]['weight'], 1.5)
     
     def test_search_by_model(self):
         self.delete_uav()
         response = self.client.get(reverse('uav-list-create'), {'search': 'Phantom'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]['model'], 'Phantom')
+        self.assertEqual(len(response.data['data']), 1)
+        self.assertEqual(response.data['data'][0]['model'], 'Phantom')
     
     def test_order_by_model(self):
         self.delete_uav()
         response = self.client.get(reverse('uav-list-create'), {'ordering': 'model'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 3)
-        self.assertEqual(response.data[0]['model'], 'Anafi')
+        self.assertEqual(len(response.data['data']), 3)
+        self.assertEqual(response.data['data'][0]['model'], 'Anafi')
 
 @override_settings(USE_TZ = False)
 class RentalTests(APITestCase):
