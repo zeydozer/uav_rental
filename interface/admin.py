@@ -1,3 +1,1 @@
-from django.contrib import admin
-
-# Register your models here.
+# This file is intentionally left empty as interface app doesn't have models to register

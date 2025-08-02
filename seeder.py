@@ -9,19 +9,23 @@ from faker import Faker
 
 fake = Faker()
 
+# 👥 Create fake users
 def seed_users(n):
     users = [UserFactory() for _ in range(n)]
     return users
 
+# 🚁 Create fake UAVs
 def seed_uavs(n):
     uavs = [UAVFactory() for _ in range(n)]
     return uavs
 
 @override_settings(USE_TZ = False)
+# 📅 Create fake rentals
 def seed_rentals(users, uavs, n):
     for _ in range(n):
         RentalFactory(renting_member=fake.random_element(users), uav=fake.random_element(uavs))
 
+# 🎯 Main execution
 if __name__ == '__main__':
     print("creating fake data...")
     users = seed_users(5)

@@ -1,16 +1,20 @@
 const TOKEN = JSON.parse(localStorage.getItem('token'))
 
+// 🎯 Master utilities and common functions
 let master = {
+    // 🚨 Show alert messages
     alert: function (type, message) {
         $('.alert').addClass('alert-' + type).html(message).show()
         setTimeout(() => {
             $('.alert').removeClass('alert-' + type).hide()
         }, 3000)
     },
+    // 🚪 Logout user
     logout: function () {
         localStorage.removeItem('token')
         location.reload()
     },
+    // 🔄 Refresh JWT token
     refresh: function () {
         $.ajax({
             type: 'POST',
@@ -28,6 +32,7 @@ let master = {
             }
         })
     },
+    // 📊 Handle DataTable ordering
     order: function (d) {
         if (d.order && d.order.length) {
             var columnIdx = d.order[0].column
@@ -37,6 +42,7 @@ let master = {
         }
         return ''
     },
+    // ⏱️ Delay function for search input
     delay: function (callback, ms) {
         var timer = 0
         return function () {

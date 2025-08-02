@@ -1,3 +1,4 @@
+// 📅 Rental DataTable Configuration
 var table = new DataTable('#rental-table', {
     "processing": true,
     "serverSide": true,
@@ -61,7 +62,10 @@ var table = new DataTable('#rental-table', {
 $(document).on('keyup', 'tfoot input', master.delay(function () {
     table.draw()
 }, 1000))
+
+// 🛠️ Rental Management Functions
 let rental = {
+    // 📝 Get rental data for editing
     get: function (id) {
         $.ajax({
             type: 'GET',
@@ -78,6 +82,7 @@ let rental = {
             }
         })
     },
+    // ✏️ Edit rental
     edit: function (_this) {
         let id = $('#edit-data').attr('data-id')
         $.ajax({
@@ -101,6 +106,7 @@ let rental = {
             }
         })
     },
+    // 🚁 Load available vehicles
     vehicle: function () {
         $.ajax({
             type: 'GET',
@@ -120,6 +126,7 @@ let rental = {
             }
         })
     },
+    // 👥 Load available members
     member: function () {
         $.ajax({
             type: 'GET',
@@ -136,6 +143,7 @@ let rental = {
             }
         })
     },
+    // 🗑️ Delete rental
     delete: function (id) {
         $.ajax({
             type: 'DELETE',
@@ -149,5 +157,7 @@ let rental = {
         })
     }
 }
+
+// 🚀 Initialize data on page load
 rental.vehicle()
 rental.member()

@@ -1,10 +1,13 @@
+// 👤 User Authentication Functions
 let user = {
+    // 🚨 Show alert messages
     alert: function (type, message) {
         $('.alert').addClass('alert-' + type).html(message).show()
         setTimeout(() => {
             $('.alert').removeClass('alert-' + type).hide()
         }, 3000)
     },
+    // 🔐 User login
     login: function (_this) {
         $.ajax({
             type: 'POST',
@@ -24,6 +27,7 @@ let user = {
             }
         })
     },
+    // 📝 User registration
     register: function (_this) {
         $.ajax({
             type: 'POST',

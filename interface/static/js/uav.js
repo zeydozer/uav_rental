@@ -1,3 +1,4 @@
+// 🚁 UAV DataTable Configuration
 var table = new DataTable('#uav-table', {
     "processing": true,
     "serverSide": true,
@@ -62,7 +63,10 @@ var table = new DataTable('#uav-table', {
 $(document).on('keyup', 'tfoot input', master.delay(function () {
     table.draw()
 }, 1000))
+
+// 🛠️ UAV Management Functions
 let uav = {
+    // 📝 Get UAV data for editing
     get: function (id) {
         $.ajax({
             type: 'GET',
@@ -79,6 +83,7 @@ let uav = {
             }
         })
     },
+    // ✏️ Edit or add UAV
     editOrAdd: function (_this) {
         let id = $('#edit-data').attr('data-id'),
             url = id != '' ?
@@ -107,6 +112,7 @@ let uav = {
             }
         })
     },
+    // 🗑️ Delete UAV
     delete: function (id) {
         $.ajax({
             type: 'DELETE',
@@ -119,6 +125,7 @@ let uav = {
             }
         })
     },
+    // 🏷️ Rent UAV
     rent: function (_this, confirm = false) {
         if (!confirm)
             $('#rent-data').attr('data-id', _this).modal('show')
@@ -148,6 +155,7 @@ let uav = {
     }
 }
 
+// 🎬 Modal event handlers
 $('#edit-data').on('show.bs.modal', function () {
     $(this).find('input').val(null)
     $(this).attr('data-id', '')

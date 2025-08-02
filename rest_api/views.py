@@ -10,8 +10,7 @@ from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import UAVFilter, RentalFilter
 
-# pagination for datatable
-
+# 📄 Pagination for DataTable
 class StandardResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'length'
     page_query_param = 'start'
@@ -25,7 +24,7 @@ class StandardResultsSetPagination(PageNumberPagination):
             'data': data
         })
 
-# user processes with jwt token
+# 👤 User Authentication Views
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -46,13 +45,13 @@ class LoginView(generics.GenericAPIView):
             })
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
-# other processes
+# 🚁 UAV Management Views
 
 class UserListView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     ordering = ['username']
-    # erişimi doğrulanmış kullanıcılara sınırlama
+    # 🔒 Restrict access to authenticated users
     permission_classes = [permissions.IsAuthenticated]
 
 class UAVListCreateView(generics.ListCreateAPIView):
@@ -82,11 +81,14 @@ class RentalListView(generics.ListAPIView):
     ordering_fields = ['uav__brand', 'renting_member__username', 'start_date', 'end_date']
     ordering = ['start_date']
 
+# 📅 Rental Management Views
+
 class RentalRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Rental.objects.all()
     serializer_class = RentalSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+# 🎯 UAV Rental Action View
 class RentUAVView(generics.GenericAPIView):
     queryset = UAV.objects.all()
     serializer_class = RentalSerializer

@@ -1,9 +1,11 @@
-# service design pattern for uav rent process
+# 🔧 Service design pattern for UAV rent process
 
 from ..models import Rental
 
+# 🏢 Rental Business Logic
 class RentalService:
     @staticmethod
+    # 📝 Create new rental record
     def rent_uav(uav, renting_member, start_date, end_date):
         rental = Rental.objects.create(
             uav=uav,
